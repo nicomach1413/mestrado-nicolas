@@ -57,7 +57,8 @@ function main()
 
     # Forças (cond. de contorno naturais)
     #         no gl valor
-    forcas = [4  1  -5000]
+    forcas = [4  1  -5000;
+              4  3  2500]
 
     # Forças distribuídas nos elementos 
     # SISTEMA LOCAL EM CADA ELEMENTO
