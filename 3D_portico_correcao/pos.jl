@@ -1,7 +1,7 @@
 #
 # Calcula os esforços normais de cada elemento
 #
-function Calcula_Esforcos_portico_3D(ne,conectividades,VE,VA,VL,VI,Lox,Mox,Nox,Gc,Jp,U,forcas_distribuidas)
+function Calcula_Esforcos_portico_3D(ne,conectividades,VE,VA,VL,VI,Lox,Mox,Nox,Gc,Jp,U)
 
     # Aloca o vetor de esforços normais
     N = zeros(ne)
@@ -73,16 +73,7 @@ function Calcula_Esforcos_portico_3D(ne,conectividades,VE,VA,VL,VI,Lox,Mox,Nox,G
         # Dados para gerar os gráficos dos elementos
         xe = range(start=0.0,stop=Le,length=10)
 
-        # Procura se existe alguma informação sobre o elemento
-        # em forcas_distribuidas
         q1 = q2 = 0.0
-        for i=1:size(forcas_distribuidas,1)
-            if Int(forcas_distribuidas[i,1])==ele
-                q1 = forcas_distribuidas[i,2]
-                q2 = forcas_distribuidas[i,3]
-                break
-            end
-        end
 
         # Esforço cortante do elemento - Direção Y
         fcy(x) = -(((q2-q1)*x^2+2*Le*q1*x+2*Fle[2]*Le)/(2*Le))

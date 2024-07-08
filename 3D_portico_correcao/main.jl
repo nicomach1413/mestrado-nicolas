@@ -60,27 +60,15 @@ function main()
     forcas = [4  1  -5000;
               4  3  2500]
 
-    # Forças distribuídas nos elementos 
-    # SISTEMA LOCAL EM CADA ELEMENTO
-    #                     ele q1  q2
-    forcas_distribuidas = []
-
     # Monta a matriz global do problema
     K = Global_portico_3d(ne,nnos,conectividades, VE, VA, VL, VI, Lox, Mox, Nox, Gc, Jp)
 
     @show K
     # Monta o vetor de forças globais concentradas
     Fc = Forca_global_concentrada(nnos,forcas)
-
-    # Monta o vetor de forças globais distribuídas
-    Fq = Forca_global_distribuida(nnos,forcas_distribuidas,VL,conectividades)
-
-    println("Aqui")
-    println(Fq)
-    println("Aqui")
     
     # O lado direito do sistema KU = F é dado por
-    F = Fc .+ Fq
+    F = Fc
 
     @show F
 
@@ -110,7 +98,7 @@ function main()
     println(U)
 
     # Pos-processa os esforços internos
-    N,Vy,My,Vz,Mz,Tor = Calcula_Esforcos_portico_3D(ne,conectividades,VE,VA,VL,VI,Lox,Mox,Nox,Gc,Jp,U,forcas_distribuidas)
+    N,Vy,My,Vz,Mz,Tor = Calcula_Esforcos_portico_3D(ne,conectividades,VE,VA,VL,VI,Lox,Mox,Nox,Gc,Jp,U)
 
     println("Deslocamentos nodais")
     println(U)

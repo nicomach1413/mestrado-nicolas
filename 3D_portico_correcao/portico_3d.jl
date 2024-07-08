@@ -98,18 +98,6 @@ function Rigidez_portico_3d(Ex,A,Iz,L,G,J)
 
 end
 
-#
-# Retorna o vetor LOCAL Fq
-#
-function Forca_distribuida_portico_3d(q1,q2,L)
-
-   # As posições 1 e 4 tem que ser zero (barra)
-
-   return [ 0.0 ; (3*L*q2+7*L*q1)/20; (2*L^2*q2+3*L^2*q1)/60; 
-            0.0 ; (7*L*q2+3*L*q1)/20; -((3*L^2*q2+2*L^2*q1)/60)];
-
-end
-#
 # Matriz de rotação para o pórtico 3D
 #
 function Matriz_rotacao_portico_3d(Lox2, Mox2, Nox2)
@@ -149,18 +137,6 @@ function Matriz_rotacao_portico_3d(Lox2, Mox2, Nox2)
    Lambda2[3,2] = -sin(0.0)
    Lambda2[3,3] = cos(0.0)
    @show Lambda2
-   """
-   Lambda1 = [Lox2 Mox2 Nox2;
-              (-(Lox2*Mox2)/De) ((Lox2^2 + Nox2^2)/De) (-(Mox2*Nox2)/De);
-              (-Nox2/De) 0.0 (Lox2/De)]
-   @show Lambda1
-   # Calcula Lambda2 - Página 331 do Rao
-
-   Lambda2 = [0.0 Mox2 0.0]
-             (-Mox2*cos(TeXY2)) 0.0 (Mox2*sin(TeXY2));
-             sin(TeXY2) 0.0 cos(TeXY2)]
-   @show Lambda2
-   """
 
    Lambda = Lambda2*Lambda1
    @show Lambda
